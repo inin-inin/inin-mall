@@ -1,10 +1,7 @@
 <template>
   <div>
      <h2>首页</h2>
-         <FormHelper>
-      <h2 slot="title">123</h2>
-      <p slot="text">这个是文本内容</p>
-    </FormHelper>
+
   </div>
 </template>
 
