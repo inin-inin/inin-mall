@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import FormHelper from "./slot";
+
 export default {
   name: 'Home',
   data () {
