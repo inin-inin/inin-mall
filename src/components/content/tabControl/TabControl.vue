@@ -48,7 +48,7 @@ export default {
     height: 40px;
     line-height: 40px;
     font-size: 17px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
     text-align: center;
     background-color: #fff;
     z-index: 9;
@@ -57,7 +57,7 @@ export default {
     flex: 1;
   }
   .tab-control-item span{
-     padding: 10px 20px;
+     padding: 4px 20px;
    }
   .active{
     color: var(--color-high-text)
