@@ -40,6 +40,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content:space-around;
+    margin-bottom: 44px;
     z-index: 9
   }
 </style>

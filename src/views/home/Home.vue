@@ -4,8 +4,10 @@
     <home-swiper :banner='banner' class="swiper00"></home-swiper>
     <recommend-view :recommend='recommend'></recommend-view>
     <feature-view></feature-view>
-    <tab-control :titles="['流行','新款','精选']" ></tab-control>
-    <goods-list :goods="goods['pop'].list" class="goodslist"></goods-list>
+    <tab-control :titles="['流行','新款','精选']" 
+                @tabClick="tabClick">
+    </tab-control>
+    <goods-list :goods="goods[currentType].list" class="goodslist"></goods-list>
    
   </div>
 </template>
@@ -32,7 +34,8 @@ export default {
         'pop': {page: 0, list:[]},
         'new': {page: 0, list:[]},
         'sell': {page: 0,list:[]}
-      }
+      },
+      currentType:'pop'
     };
   },
   components: {   
@@ -55,6 +58,29 @@ export default {
     
   },
   methods: {
+    /**
+     * 事件监听监听的方法
+     */
+    tabClick(index){
+      console.log(index);
+      switch (index) {
+        case 0:
+          this.currentType = 'pop'
+          break;
+      
+        case 1:
+          this.currentType = 'new'
+          break;
+        case 2:
+          this.currentType = 'sell'
+          break;
+      }
+    },
+
+
+    /**
+     * 网络请求的数据
+     */
      // 1.请求多个数据
     getHomeMultidata(){
       getHomeMultidata().then(res => {

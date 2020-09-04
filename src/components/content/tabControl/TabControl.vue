@@ -34,6 +34,7 @@ export default {
   methods: {
     itemClick(index){
       this.currentIndex = index;
+      this.$emit('tabClick',index)
     }
   }
 }
@@ -44,10 +45,11 @@ export default {
     display: flex; 
     position: sticky;
     top: 44px;
-    text-align: center;
     height: 40px;
     line-height: 40px;
     font-size: 17px;
+    margin-bottom: 10px;
+    text-align: center;
     background-color: #fff;
     z-index: 9;
   }
