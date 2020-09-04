@@ -7,7 +7,7 @@
     <tab-control :titles="['流行','新款','精选']" 
                 @tabClick="tabClick">
     </tab-control>
-    <goods-list :goods="goods[currentType].list" class="goodslist"></goods-list>
+    <goods-list :goods="showGoods" class="goodslist"></goods-list>
    
   </div>
 </template>
@@ -38,6 +38,11 @@ export default {
       currentType:'pop'
     };
   },
+  computed: {
+    showGoods(){
+      return this.goods[this.currentType].list
+    }
+  },
   components: {   
     HomeSwiper,
     RecommendView,
@@ -53,9 +58,6 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
-  },
-  mounted () {
-    
   },
   methods: {
     /**
