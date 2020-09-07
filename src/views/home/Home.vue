@@ -75,6 +75,9 @@ export default {
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
 
+
+  },
+  mounted(){
     // 3.监听item中图片加载完毕
     this.$bus.$on('itemImageLoad',()=>{
       console.log('---------');
