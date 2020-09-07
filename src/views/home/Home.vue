@@ -1,18 +1,18 @@
 <template>
-  <div>
+  <div class="aaa">
       <nav-bar class="home-nav"><span slot="center">购物街</span></nav-bar>
-    <!-- <scroll class="content"> -->
-     <div>
-        <home-swiper :banner='banner' class="swiper00"></home-swiper>
+    <scroll class="content">
+     <!-- <div class="content"> -->
+        <home-swiper :banner='banner'></home-swiper>
         <recommend-view :recommend='recommend'></recommend-view>
         <feature-view></feature-view>
         <tab-control :titles="['流行','新款','精选']" 
                     @tabClick="tabClick">
         </tab-control>
-      
         <goods-list :goods="showGoods" class="goodslist"></goods-list>
-     </div>
-    <!-- </scroll> -->
+     <!-- </div> -->
+    </scroll>
+    <back-top></back-top>
   </div>
 </template>
 
@@ -25,6 +25,7 @@ import Scroll from 'components/common/scroll/Scroll'
 import NavBar from 'components/common/navbar/NavBar'
 import TabControl from 'components/content/tabControl/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
+import BackTop from 'components/content/backTop/BackTop'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home.js'
 
@@ -57,7 +58,8 @@ export default {
     NavBar,
     TabControl,
     GoodsList,
-    Scroll
+    Scroll,
+    BackTop
   },
   created(){
     // 1.请求多个数据
@@ -111,9 +113,6 @@ export default {
 </script>
   
 <style scoped>
-  .swiper00{
-    margin-top: 44px;
-  }
   .home-nav{
     position: fixed;  
     top: 0;
@@ -123,8 +122,16 @@ export default {
     background-color:#f4ea2a;
     z-index: 10;
   }
-/* .content{
-  height: 500px;
-  overflow: hidden;
-} */
+.aaa{
+  position: relative;
+}
+.content{
+  position: absolute;
+  height: 300px;
+  top: 44px;
+  left: 0;
+  right: 0;
+  padding-bottom: 49px;
+  /* overflow: hidden; */
+}
 </style>

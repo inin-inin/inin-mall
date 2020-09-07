@@ -7,10 +7,7 @@
 </template>
 
 <script>
-import BScroll from '@better-scroll/core'
-import Pullup from '@better-scroll/pull-up'
-
-BScroll.use(Pullup)
+import BScroll from 'better-scroll'
 
 export default {
   name: 'Scroll',
@@ -57,8 +54,8 @@ export default {
     background-color: blue;
     overflow: hidden;
      overflow: scroll */
-     position: absolute;
-left: 0;
-top: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 </style>
