@@ -1,5 +1,5 @@
 <template>
-  <div class="back-top" @click="backClick" v-show="Show">
+  <div class="back-top">
      <img src="~assets/img/common/top.png" alt="">
   </div>
 </template>
@@ -9,7 +9,7 @@ export default {
   name: 'BackTop',
   data () {
     return {
-      Show:true
+
     };
   },
   components: {
@@ -19,9 +19,6 @@ export default {
     
   },
   methods: {
-    backClick(){
-      console.log('回到顶部');
-    }
   }
 }
 </script>

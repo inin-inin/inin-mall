@@ -1,8 +1,6 @@
 <template>
   <div class="wrapper" ref="scroll">
-     <div class="content">
        <slot></slot>
-     </div>
   </div>
 </template>
 
@@ -11,38 +9,62 @@ import BScroll from 'better-scroll'
 
 export default {
   name: 'Scroll',
-  created(){
-   
-  },
   data () {
     return {
       bs:null
     };
   },
+  props:{
+    probeType:{
+      Type: Number,
+      default: 0
+    },
+    pullUpLoad:{
+      type: Boolean,
+      default: false
+    }
+  },
+  created(){
+   
+  },
+
   components: {
   },
   mounted () {
      this.init()
   },
   methods: {
-     init() {
+    init() {
+      // 1.创建对象
       this.bs = new BScroll(this.$refs.scroll, {
         click: true,
-        probeType: 3,// listening scroll hook
-        pullUpLoad: true
+        probeType: this.probeType,// listening scroll hook
+        pullUpLoad: this.pullUpLoad
       })
-      this.bs.on('scroll', ({ y }) => {
-        console.log('scrolling-')
+      // 2.监听滚动位置
+      this.bs.on('scroll', (position) => {
+        // console.log('scrolling-',y)
+        this.$emit('scroll', position)
       })
       this.bs.on('scrollEnd', () => {
-        console.log('scrollingEnd')
+        // console.log('scrollingEnd')
       })
+      // 3.监听上拉事件
       this.bs.on('pullingUp',() => {
-        console.log('上拉加载更多');
+        // console.log('上拉加载更多');
+        this.$emit('pullingUp')
       })
+
+      // this.bs.scrollTo(0,0)
     },
-    click(){
-      console.log('click');
+    scrollTo(x, y, time) {
+	    this.bs && this.bs.scrollTo && this.bs.scrollTo(x, y, time)
+    },
+    refresh() {
+      this.bs && this.bs.refresh && this.bs.refresh()
+    },
+    finishPullUp(){
+      this.bs.finishPullUp()
     }
   }
 }

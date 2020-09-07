@@ -1,8 +1,13 @@
 <template>
   <div class="aaa">
       <nav-bar class="home-nav"><span slot="center">购物街</span></nav-bar>
-    <scroll class="content">
-     <!-- <div class="content"> -->
+    <scroll class="content" 
+            ref="scroll" 
+            :probe-type="3" 
+            @scroll="contentScroll"
+            :pull-up-load="true"
+            @pullingUp="loadMore">
+     <div>
         <home-swiper :banner='banner'></home-swiper>
         <recommend-view :recommend='recommend'></recommend-view>
         <feature-view></feature-view>
@@ -10,9 +15,9 @@
                     @tabClick="tabClick">
         </tab-control>
         <goods-list :goods="showGoods" class="goodslist"></goods-list>
-     <!-- </div> -->
+     </div>
     </scroll>
-    <back-top></back-top>
+    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -43,7 +48,8 @@ export default {
         'new': {page: 0, list:[]},
         'sell': {page: 0,list:[]}
       },
-      currentType:'pop'
+      currentType:'pop',
+      isShowBackTop: false
     };
   },
   computed: {
@@ -68,6 +74,12 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
+
+    // 3.监听item中图片加载完毕
+    this.$bus.$on('itemImageLoad',()=>{
+      console.log('---------');
+      this.$refs.scroll.refresh()
+    })
   },
   methods: {
     /**
@@ -88,8 +100,17 @@ export default {
           break;
       }
     },
-
-
+    backClick(){
+      this.$refs.scroll.scrollTo(0,0)
+    },
+    contentScroll(position){
+      // console.log(position);
+      this.isShowBackTop = (-position.y) > 1000
+    },
+    loadMore(){
+      // console.log('上拉加载更多123');
+      this.getHomeGoods(this.currentType)
+    },
     /**
      * 网络请求的数据
      */
@@ -105,7 +126,10 @@ export default {
       const page = this.goods[type].page + 1
       getHomeGoods(type, page).then(res => {
         this.goods[type].list.push(...res.data.list)
-        // this.goods[type].page += 1
+        this.goods[type].page += 1
+
+        this.$refs.scroll.finishPullUp()
+        this.$refs.scroll.refresh()
       })
     }
   }
@@ -122,16 +146,12 @@ export default {
     background-color:#f4ea2a;
     z-index: 10;
   }
-.aaa{
-  position: relative;
-}
+
 .content{
   position: absolute;
-  height: 300px;
   top: 44px;
   left: 0;
   right: 0;
-  padding-bottom: 49px;
-  /* overflow: hidden; */
+  bottom: 49px;
 }
 </style>
