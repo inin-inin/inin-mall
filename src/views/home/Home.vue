@@ -117,8 +117,9 @@ export default {
       }
       // console.log(this.$refs.tabControl1.currentType);
       // console.log(this.$refs.tabControl2.currentType);
-      this.$refs.tabControl1.currentType = index
-      this.$refs.tabControl2.currentType = index
+      this.$refs.tabControl1.currentIndex = index
+      this.currentIndex
+      this.$refs.tabControl2.currentIndex = index
       // index = this.$refs.tabControl1.currentType
     },
     backClick(){
