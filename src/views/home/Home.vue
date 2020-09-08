@@ -1,30 +1,30 @@
 <template>
-  <div class="aaa">
-      <nav-bar class="home-nav"><span slot="center">购物街</span></nav-bar>
-      <tab-control :titles="['流行','新款','精选']" 
-                    @tabClick="tabClick"
-                    ref="tabControl1"
-                    class="tab-control" v-show="isTabFixed">
-                    </tab-control>
-    <scroll class="content" 
-            ref="scroll" 
-            :probe-type="3" 
-            @scroll="contentScroll"
-            :pull-up-load="true"
-            @pullingUp="loadMore">
-     <div>
-        <home-swiper :banner='banner' @swiperImageLoad='swiperImageLoad'></home-swiper>
-        <recommend-view :recommend='recommend'></recommend-view>
-        <feature-view></feature-view>
+    <div class="aaa">
+        <nav-bar class="home-nav"><span slot="center">购物街</span></nav-bar>
         <tab-control :titles="['流行','新款','精选']" 
-                    @tabClick="tabClick"
-                    ref="tabControl2">
-        </tab-control>
-        <goods-list :goods="showGoods" class="goodslist"></goods-list>
-     </div>
-    </scroll>
-    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
-  </div>
+                      @tabClick="tabClick"
+                      ref="tabControl1"
+                      class="tab-control" v-show="isTabFixed">
+                      </tab-control>
+      <scroll class="content" 
+              ref="scroll" 
+              :probe-type="3" 
+              @scroll="contentScroll"
+              :pull-up-load="true"
+              @pullingUp="loadMore">
+       <div>
+          <home-swiper :banner='banner' @swiperImageLoad='swiperImageLoad'></home-swiper>
+          <recommend-view :recommend='recommend'></recommend-view>
+          <feature-view></feature-view>
+          <tab-control :titles="['流行','新款','精选']" 
+                      @tabClick="tabClick"
+                      ref="tabControl2">
+          </tab-control>
+          <goods-list :goods="showGoods" class="goodslist"></goods-list>
+       </div>
+      </scroll>
+      <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
+    </div>
 </template>
 
 <script>
@@ -65,6 +65,7 @@ export default {
       return this.goods[this.currentType].list
     }
   },
+
   components: {   
     HomeSwiper,
     RecommendView,
@@ -82,8 +83,14 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
+    console.log('created');
 
-
+  },
+  activated() {
+    console.log('activated');
+  },
+  deactivated() {
+    console.log('deactivated');
   },
   mounted(){
     // 1.图片加载完的事件监听
@@ -97,6 +104,10 @@ export default {
     // 2.获取tabControl的offsetTop
     // console.log(this.$refs.tabControl.$el.offsetTop);
   },
+  // destroyed() {
+  //   console.log('home destroyed');
+  // },
+
   methods: {
     /**
      * 事件监听相关的方法
