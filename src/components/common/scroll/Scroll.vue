@@ -49,18 +49,21 @@ export default {
       this.bs.on('scrollEnd', () => {
         // console.log('scrollingEnd')
       })
-      // 3.监听上拉事件
-      this.bs.on('pullingUp',() => {
-        // console.log('上拉加载更多');
-        this.$emit('pullingUp')
-      })
-
+      // 3.监听scroll滚动到底部
+      if(this.pullUpLoad){
+        this.bs.on('pullingUp',() => {
+          // console.log('上拉加载更多');
+          this.$emit('pullingUp')
+        })
+      }
+     
       // this.bs.scrollTo(0,0)
     },
     scrollTo(x, y, time) {
 	    this.bs && this.bs.scrollTo && this.bs.scrollTo(x, y, time)
     },
     refresh() {
+      // console.log('-----');
       this.bs && this.bs.refresh && this.bs.refresh()
     },
     finishPullUp(){
