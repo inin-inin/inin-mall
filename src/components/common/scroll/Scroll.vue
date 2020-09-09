@@ -68,6 +68,9 @@ export default {
     },
     finishPullUp(){
       this.bs.finishPullUp()
+    },
+    getScrollY(){
+      return this.bs ? this.bs.y : 0
     }
   }
 }

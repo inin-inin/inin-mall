@@ -57,7 +57,8 @@ export default {
       currentType:'pop',
       isShowBackTop: false,
       tabOffsetTop: 0,
-      isTabFixed: false
+      isTabFixed: false,
+      saveY: 0
     };
   },
   computed: {
@@ -87,10 +88,14 @@ export default {
 
   },
   activated() {
-    console.log('activated');
+    // console.log('activated');
+    this.$refs.scroll.scrollTo(0, this.saveY, 0)
+    // this.$refs.scroll.refresh()
   },
   deactivated() {
-    console.log('deactivated');
+    // console.log('deactivated');
+    this.saveY = this.$refs.scroll.getScrollY()
+    console.log(this.saveY);
   },
   mounted(){
     // 1.图片加载完的事件监听
@@ -104,9 +109,9 @@ export default {
     // 2.获取tabControl的offsetTop
     // console.log(this.$refs.tabControl.$el.offsetTop);
   },
-  // destroyed() {
-  //   console.log('home destroyed');
-  // },
+  destroyed() {
+    console.log('home destroyed');
+  },
 
   methods: {
     /**
