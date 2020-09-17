@@ -1,28 +1,38 @@
 <template>
-  <div id="detail">
+  <div id="detail" >
     <detail-nav-bar></detail-nav-bar>
-    <detail-swiper :top-images="topImages"></detail-swiper>
-     <h2>详情页</h2>
+    <scroll class="content">
+      <div>
+        <detail-swiper :top-images="topImages"></detail-swiper>
+        <detail-base-info :goods="goods"></detail-base-info>
+        <h2>详情页</h2>
+      </div>
+     </scroll>
   </div>
 </template>
 
 <script>
 import DetailNavBar from './childComps/DetailNavBar'
 import DetailSwiper from './childComps/DetailSwiper'
+import DetailBaseInfo from './childComps/DetailBaseInfo'
+import Scroll from 'components/common/scroll/Scroll'
 
-import {getDetail} from 'network/detail'
+import {getDetail,Goods} from 'network/detail'
 
 export default {
   name: 'Detail',
   data () {
     return {
       iid: null,
-      topImages: []
+      topImages: [],
+      goods: {}
     };
   },
   components: {
     DetailNavBar,
-    DetailSwiper
+    DetailSwiper,
+    DetailBaseInfo,
+    Scroll
   },
   created() {
     // console.log(this.$route.params);
@@ -33,8 +43,12 @@ export default {
     getDetail(this.iid).then(res => {
       // 1.根据顶部的图片轮播数据
       console.log(res);
-      this.topImages = res.result.itemInfo.topImages
+      const data = res.result
+      this.topImages = data.itemInfo.topImages
       console.log(this.topImages);
+
+      //2.获取商品信息
+      this.goods = new Goods(data.itemInfo,data.columns,data.shopInfo.services)
     })
   },
   mounted () {
@@ -47,5 +61,15 @@ export default {
 </script>
   
 <style scoped>
-
+ #detail {
+    height: 100vh;
+    position: relative;
+    z-index: 9;
+    background-color: #fff;
+  }
+  .content {
+    position: absolute;
+    top: 44px;
+    bottom: 60px;
+  }
 </style>

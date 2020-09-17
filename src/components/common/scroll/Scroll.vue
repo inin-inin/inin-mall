@@ -77,13 +77,5 @@ export default {
 </script>
   
 <style scoped>
-  .wrapper{
-    /* height: 300px; 
-    background-color: blue;
-    overflow: hidden;
-     overflow: scroll */
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <nav-bar>
+  <nav-bar class="aa">
     <div slot="left" class="back" @click="backClick">
       <img src="~assets/img/common/back.svg">
     </div>
@@ -42,6 +42,10 @@ export default {
 </script>
   
 <style scoped>
+.aa{
+  position: relative;
+  background-color: #fff;
+}
   .back{
     margin-top: 6px;
   }
