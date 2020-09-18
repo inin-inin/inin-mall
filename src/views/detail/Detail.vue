@@ -7,7 +7,9 @@
         <detail-base-info :goods="goods"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
         <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
-        <h2>详情页</h2>
+        <detail-param-info :param-info="paramInfo"></detail-param-info>
+        <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
+        <!-- <h2>详情页</h2> -->
       </div>
      </scroll>
   </div>
@@ -20,9 +22,10 @@ import DetailSwiper from './childComps/DetailSwiper'
 import DetailBaseInfo from './childComps/DetailBaseInfo'
 import DetailShopInfo from './childComps/DetailShopInfo'
 import DetailGoodsInfo from './childComps/DetailGoodsInfo'
+import DetailParamInfo from './childComps/DetailParamInfo'
+import DetailCommentInfo from './childComps/DetailCommentInfo'
 
-
-import {getDetail,Goods,Shop} from 'network/detail'
+import {getDetail,Goods,Shop,GoodsParam} from 'network/detail'
 
 export default {
   name: 'Detail',
@@ -32,7 +35,9 @@ export default {
       topImages: [],
       goods: {},
       shop: {},
-      detailInfo: {}
+      detailInfo: {},
+      paramInfo: {},
+      commentInfo: {}
     };
   },
   components: {
@@ -41,7 +46,9 @@ export default {
     DetailSwiper,
     DetailBaseInfo,
     DetailShopInfo,
-    DetailGoodsInfo
+    DetailGoodsInfo,
+    DetailParamInfo,
+    DetailCommentInfo
   },
   created() {
     // console.log(this.$route.params);
@@ -54,7 +61,7 @@ export default {
       console.log(res);
       const data = res.result
       this.topImages = data.itemInfo.topImages
-      console.log(this.topImages);
+      // console.log(this.topImages);
 
       // 2.获取商品信息
       this.goods = new Goods(data.itemInfo,data.columns,data.shopInfo.services)
@@ -64,6 +71,15 @@ export default {
 
       // 4.保存商品的详情数据
       this.detailInfo = data.detailInfo;
+
+      // 5.获取参数的信息
+      this.paramInfo = new GoodsParam(data.itemParams.info,data.itemParams.rule)
+
+      // 6.获取评论信息
+      if(data.rate.cRate !== 0){
+        console.log(data.rate.list[0]);
+        this.commentInfo = data.rate.list[0]
+      }
     })
   },
   mounted () {
