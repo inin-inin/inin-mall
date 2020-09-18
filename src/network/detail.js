@@ -46,4 +46,10 @@ const obj = {
 
 }
 
+export function getRecommend() {
+    return request({
+        url: '/recommend'
+    })
+}
+
 Object.keys(obj).length === 0

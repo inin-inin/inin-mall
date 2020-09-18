@@ -9,6 +9,7 @@
         <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
         <detail-param-info :param-info="paramInfo"></detail-param-info>
         <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
+        <goods-list :goods="recommends"></goods-list>
         <!-- <h2>详情页</h2> -->
       </div>
      </scroll>
@@ -24,8 +25,9 @@ import DetailShopInfo from './childComps/DetailShopInfo'
 import DetailGoodsInfo from './childComps/DetailGoodsInfo'
 import DetailParamInfo from './childComps/DetailParamInfo'
 import DetailCommentInfo from './childComps/DetailCommentInfo'
+import GoodsList from 'components/content/goods/GoodsList'
 
-import {getDetail,Goods,Shop,GoodsParam} from 'network/detail'
+import {getDetail,Goods,Shop,GoodsParam,getRecommend} from 'network/detail'
 
 export default {
   name: 'Detail',
@@ -37,7 +39,8 @@ export default {
       shop: {},
       detailInfo: {},
       paramInfo: {},
-      commentInfo: {}
+      commentInfo: {},
+      recommends: []
     };
   },
   components: {
@@ -48,7 +51,8 @@ export default {
     DetailShopInfo,
     DetailGoodsInfo,
     DetailParamInfo,
-    DetailCommentInfo
+    DetailCommentInfo,
+    GoodsList
   },
   created() {
     // console.log(this.$route.params);
@@ -80,6 +84,14 @@ export default {
         console.log(data.rate.list[0]);
         this.commentInfo = data.rate.list[0]
       }
+
+      
+    })
+
+    // 3.请求推荐数据
+    getRecommend().then(res=>{
+      console.log(res);
+      this.recommends = res.data.list
     })
   },
   mounted () {
