@@ -1,11 +1,12 @@
 <template>
   <div id="detail" >
     <detail-nav-bar></detail-nav-bar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
       <div>
         <detail-swiper :top-images="topImages"></detail-swiper>
         <detail-base-info :goods="goods"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
+        <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
         <h2>详情页</h2>
       </div>
      </scroll>
@@ -13,11 +14,13 @@
 </template>
 
 <script>
+import Scroll from 'components/common/scroll/Scroll'
 import DetailNavBar from './childComps/DetailNavBar'
 import DetailSwiper from './childComps/DetailSwiper'
 import DetailBaseInfo from './childComps/DetailBaseInfo'
 import DetailShopInfo from './childComps/DetailShopInfo'
-import Scroll from 'components/common/scroll/Scroll'
+import DetailGoodsInfo from './childComps/DetailGoodsInfo'
+
 
 import {getDetail,Goods,Shop} from 'network/detail'
 
@@ -28,15 +31,17 @@ export default {
       iid: null,
       topImages: [],
       goods: {},
-      shop: {}
+      shop: {},
+      detailInfo: {}
     };
   },
   components: {
     DetailNavBar,
+    Scroll,
     DetailSwiper,
     DetailBaseInfo,
     DetailShopInfo,
-    Scroll
+    DetailGoodsInfo
   },
   created() {
     // console.log(this.$route.params);
@@ -56,13 +61,18 @@ export default {
 
       // 3.创建店铺信息的对象
       this.shop = new Shop(data.shopInfo)
+
+      // 4.保存商品的详情数据
+      this.detailInfo = data.detailInfo;
     })
   },
   mounted () {
     
   },
   methods: {
-    
+    imageLoad(){
+      this.$refs.scroll.refresh()
+    }
   }
 }
 </script>
