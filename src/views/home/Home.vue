@@ -13,7 +13,7 @@
               :pull-up-load="true"
               @pullingUp="loadMore">
        <div>
-          <home-swiper :banner='banner' @swiperImageLoad='swiperImageLoad'></home-swiper>
+          <home-swiper1 :banner='banner' @swiperImageLoad='swiperImageLoad'></home-swiper1>
           <recommend-view :recommend='recommend'></recommend-view>
           <feature-view></feature-view>
           <tab-control :titles="['流行','新款','精选']" 
@@ -24,11 +24,12 @@
        </div>
       </scroll>
       <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
+       <!-- <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop> -->
     </div>
 </template>
 
 <script>
-import HomeSwiper from './childComps/HomeSwiper'
+import HomeSwiper1 from './childComps/HomeSwiper1'
 import RecommendView from './childComps/RecommendView'
 import FeatureView from './childComps/FeatureView'
 
@@ -40,10 +41,11 @@ import BackTop from 'components/content/backTop/BackTop'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home.js'
 import {debounce} from 'common/utils.js'
-
+import {itemListenerMixin} from 'common/mixin'
 
 export default {
   name: 'Home',
+  mixins:[itemListenerMixin],
   data () {
     return {
       // result:null
@@ -68,7 +70,7 @@ export default {
   },
 
   components: {   
-    HomeSwiper,
+    HomeSwiper1,
     RecommendView,
     FeatureView,
     NavBar,
@@ -84,30 +86,25 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
-    console.log('created');
+    // console.log('created');
 
   },
   activated() {
-    console.log('activated');
+    // console.log('activated');
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
     this.$refs.scroll.refresh()
   },
   deactivated() {
-    console.log('deactivated');
+    // console.log('deactivated');
+    // 保存Y值
     this.saveY = this.$refs.scroll.getScrollY()
-    console.log(this.saveY);
+    // console.log(this.saveY);
+
+    // 取消全局事件的监听
+    this.$bus.$off('itemImageLoad',this.itemImgListener)
   },
   mounted(){
-    // 1.图片加载完的事件监听
-    const refresh = debounce(this.$refs.scroll.refresh,50)
-    this.$bus.$on('itemImageLoad',() => {
-      // console.log('---------');
-      // this.$refs.scroll.refresh()
-      refresh()
-    })
-
-    // 2.获取tabControl的offsetTop
-    // console.log(this.$refs.tabControl.$el.offsetTop);
+   
   },
   destroyed() {
     console.log('home destroyed');
@@ -192,7 +189,7 @@ export default {
     left: 0;
     right: 0;  */
     color: white;
-    background-color:#f4ea2a;
+    background-color: #FFB6C1;
     z-index: 10;
   }
 

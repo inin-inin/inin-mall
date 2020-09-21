@@ -1,15 +1,15 @@
 <template>
   <div id="detail" >
-    <detail-nav-bar></detail-nav-bar>
+    <detail-nav-bar @titleClick="titleClick"></detail-nav-bar>
     <scroll class="content" ref="scroll">
       <div>
         <detail-swiper :top-images="topImages"></detail-swiper>
         <detail-base-info :goods="goods"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
         <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
-        <detail-param-info :param-info="paramInfo"></detail-param-info>
-        <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
-        <goods-list :goods="recommends"></goods-list>
+        <detail-param-info ref="params" :param-info="paramInfo"></detail-param-info>
+        <detail-comment-info ref="comment" :comment-info="commentInfo"></detail-comment-info>
+        <goods-list ref="recommend" :goods="recommends"></goods-list>
         <!-- <h2>详情页</h2> -->
       </div>
      </scroll>
@@ -28,9 +28,12 @@ import DetailCommentInfo from './childComps/DetailCommentInfo'
 import GoodsList from 'components/content/goods/GoodsList'
 
 import {getDetail,Goods,Shop,GoodsParam,getRecommend} from 'network/detail'
+import {debounce} from 'common/utils.js'
+import {itemListenerMixin} from 'common/mixin'
 
 export default {
   name: 'Detail',
+  mixins:[itemListenerMixin],
   data () {
     return {
       iid: null,
@@ -40,7 +43,8 @@ export default {
       detailInfo: {},
       paramInfo: {},
       commentInfo: {},
-      recommends: []
+      recommends: [],
+      themeTopYs: []
     };
   },
   components: {
@@ -62,7 +66,7 @@ export default {
     // 2.根据iid请求详情数据
     getDetail(this.iid).then(res => {
       // 1.根据顶部的图片轮播数据
-      console.log(res);
+      // console.log(res);
       const data = res.result
       this.topImages = data.itemInfo.topImages
       // console.log(this.topImages);
@@ -81,25 +85,40 @@ export default {
 
       // 6.获取评论信息
       if(data.rate.cRate !== 0){
-        console.log(data.rate.list[0]);
+        // console.log(data.rate.list[0]);
         this.commentInfo = data.rate.list[0]
       }
-
-      
     })
 
-    // 3.请求推荐数据
-    getRecommend().then(res=>{
-      console.log(res);
-      this.recommends = res.data.list
-    })
+      // 7.请求推荐数据
+      getRecommend().then(res=>{
+        // console.log(res);
+        this.recommends = res.data.list
+      })
+
+  
   },
   mounted () {
-    
+   
+  },
+  destroyed(){
+    // 取消全局事件的监听
+    this.$bus.$off('itemImageLoad',this.itemImgListener)
   },
   methods: {
     imageLoad(){
       this.$refs.scroll.refresh()
+      this.themeTopYs = []
+        this.themeTopYs.push(0);
+        this.themeTopYs.push(this.$refs.params.$el.offsetTop);
+        this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
+        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
+        console.log(this.$refs.params.$el.offsetTop);
+        console.log(this.themeTopYs);
+    },
+    titleClick(index){
+      // console.log(index);
+      this.$refs.scroll.scrollTo(0,-this.themeTopYs[index],200)
     }
   }
 }
