@@ -15,8 +15,11 @@
         <goods-list ref="recommend" :goods="recommends"></goods-list>
         <!-- <h2>详情页</h2> -->
       </div>
-     </scroll>
-     <Detail-bottom-bar></Detail-bottom-bar>
+     </scroll>  
+     <back-top @click.native="backClick" class="back-top" v-show="isShowBackTop">
+      <img src="~assets/img/common/top.png" alt="">
+    </back-top>
+    <Detail-bottom-bar @addToCart="addToCart"></Detail-bottom-bar>
   </div>
 </template>
 
@@ -35,12 +38,12 @@ import BackTop from 'components/content/backTop/BackTop'
 
 import {getDetail,Goods,Shop,GoodsParam,getRecommend} from 'network/detail'
 import {debounce} from 'common/utils.js'
-import {itemListenerMixin} from 'common/mixin'
+import {itemListenerMixin,backTopMixin} from 'common/mixin'
 
 
 export default {
   name: 'Detail',
-  mixins:[itemListenerMixin],
+  mixins:[itemListenerMixin,backTopMixin],
   data () {
     return {
       iid: null,
@@ -71,14 +74,14 @@ export default {
     BackTop
   },
   created() {
-    // console.log(this.$route.params);
+    // console.log(this.$route.params); 
     // 1.保存传入的iid
     this.iid = this.$route.params.iid
 
     // 2.根据iid请求详情数据
     getDetail(this.iid).then(res => {
       // 1.根据顶部的图片轮播数据
-      // console.log(res);
+      console.log(res);
       const data = res.result
       this.topImages = data.itemInfo.topImages
       // console.log(this.topImages);
@@ -121,7 +124,7 @@ export default {
     imageLoad(){
       this.$refs.scroll.refresh()
 
-      this.getThemeTopY = debounce(()=>{
+      // this.getThemeTopY = debounce(()=>{
         this.themeTopYs = []
         this.themeTopYs.push(0);
         this.themeTopYs.push(this.$refs.params.$el.offsetTop);
@@ -131,18 +134,18 @@ export default {
 
         console.log(this.$refs.params.$el.offsetTop);
         console.log(this.themeTopYs);
-      },1000)
+      // },1000)
     },
     titleClick(index){
       // console.log(index);
       this.$refs.scroll.scrollTo(0,-this.themeTopYs[index],200)
-;
     },
     contentScroll(position){
       // console.log(position);
       // 1.获取y值
       const positionY = -position.y
-     
+  
+
       // 2.positionY和主题值进行对比
       // [ 0, 2979, 3823, 4112 ]
       console.log(Number.MAX_VALUE);
@@ -180,8 +183,23 @@ export default {
           //   console.log(this.currentIndex);
           //   this.$refs.nav.currentIndex = this.currentIndex
           // }
-        }
+
+          // 是否显示回到顶部
+          this.listenShowBackTop(position)
+        },
+    addToCart(){
+      // console.log('123321');
+      // 1.获取购物车需要展示的信息
+      const product = {}
+      product.image = this. topImages[0]
+      console.log(this.goods.title);
+      product.title = this.goods.title
+      product.desc = this.goods.desc
+      product.price = this.goods.discount
+      product.iid = this.iid
+
     }
+  }
   }
 
 </script>

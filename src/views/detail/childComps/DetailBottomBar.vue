@@ -26,6 +26,7 @@
 		name: "DetailBottomBar",
     methods: {
       addToCart() {
+        console.log('点击加入购物车');
         this.$emit('addToCart')
       }
     }
