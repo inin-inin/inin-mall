@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <!-- <span class="demonstration">默认 Hover 指示器触发</span> --> 
+    <!-- <span class="demonstration">默认 Hover 指示器触发</span> -->
      <el-carousel height="200px">
       <el-carousel-item v-for="(item, index) in banner" :key="index">
         <img :src="item.image" alt="" @load="imageLoad">
