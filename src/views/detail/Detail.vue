@@ -1,11 +1,20 @@
 <template>
-  <div id="detail" >
-    <detail-nav-bar @titleClick="titleClick" ref="nav"></detail-nav-bar>
+  <div id="detail" > 
+    <!-- <div>{{$store.state.cartList.length}}</div> -->
+
+
+   <detail-nav-bar @titleClick="titleClick" ref="nav"></detail-nav-bar>
+   <ul>
+     <li v-for="(item, index) in $store.state.cartList" :key="index">
+       {{item}}
+     </li>
+   </ul>
     <scroll class="content" 
     ref="scroll" 
     :probe-type="3" 
     @scroll="contentScroll">
       <div>
+       
         <detail-swiper :top-images="topImages"></detail-swiper>
         <detail-base-info :goods="goods"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
@@ -198,6 +207,14 @@ export default {
       product.price = this.goods.discount
       product.iid = this.iid
 
+      // 2.将商品添加到购物车里
+      // this.$store.cartList.push(product)
+
+      // mutation用commit
+      this.$store.commit('addToCart',product)
+      console.log(this.$store.state.cartList.length);
+      // action用dispatch
+      //  this.$store.dispatch('addToCart',product)
     }
   }
   }
