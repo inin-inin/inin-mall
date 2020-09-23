@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <el-container>
-      <el-header>Header</el-header>
-      <el-main>Main</el-main>
-    </el-container>
+    <div class="profile">
+    <!-- 导航 -->
+     <nav-bar  class="nav-bar">
+       <div slot="center">我的</div>
+     </nav-bar>
+     <!-- 商品的列表 -->
+
+     <!-- 底部汇总 -->
   </div>
 </template>
 
 <script>
+import NavBar from 'components/common/navbar/NavBar'
 export default {
   name: 'Profile',
   data () {
@@ -16,7 +20,7 @@ export default {
     };
   },
   components: {
-    
+    NavBar
   },
   mounted () {
     
@@ -28,23 +32,8 @@ export default {
 </script>
   
 <style scoped>
-#el-header{
-  height:300px
-}
-   .el-header{
-    /* height: 300px; */
+ .nav-bar{
     background-color: var(--color-high-text);
-    color: #333;
-    text-align: center;
-    line-height: 60px;
+    color: #fff
   }
-   .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
-  }
-   /* body > .el-container {
-    margin-bottom: 40px;
-  } */
 </style>
