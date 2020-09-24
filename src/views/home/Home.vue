@@ -12,7 +12,6 @@
               @scroll="contentScroll"
               :pull-up-load="true"
               @pullingUp="loadMore">
-       <div>
           <home-swiper1 :banner='banner' @swiperImageLoad='swiperImageLoad'></home-swiper1>
           <recommend-view :recommend='recommend'></recommend-view>
           <feature-view></feature-view>
@@ -21,7 +20,6 @@
                       ref="tabControl2">
           </tab-control>
           <goods-list :goods="showGoods" class="goodslist"></goods-list>
-       </div>
       </scroll>
       <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
        <!-- <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop> -->

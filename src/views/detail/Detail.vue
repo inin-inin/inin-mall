@@ -204,7 +204,7 @@ export default {
       console.log(this.goods.title);
       product.title = this.goods.title
       product.desc = this.goods.desc
-      product.price = this.goods.discount
+      product.price = this.goods.newPrice 
       product.iid = this.iid
 
       // 2.将商品添加到购物车里

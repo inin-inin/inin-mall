@@ -1,11 +1,11 @@
 <template>
   <div class="cart">
     <!-- 导航 -->
-     <nav-bar  class="nav-bar">
-       <div slot="center">购物车({{cartLength}})</div>
+     <nav-bar class="nav-bar">
+       <div slot="center">购物车({{length}})</div>
      </nav-bar>
      <!-- 商品的列表 -->
-
+    <cart-list></cart-list>
      <!-- 底部汇总 -->
   </div>
 </template>
@@ -14,6 +14,7 @@
 import NavBar from 'components/common/navbar/NavBar'
 import CartList from './childComps/CartList'
 
+import { mapGetters } from 'vuex'
 export default {
   name: 'Cart',
   data () {
@@ -22,13 +23,16 @@ export default {
     };
   },
   components: {
-    NavBar
+    NavBar,
+    CartList
   },
   computed:{
-    cartLength(){
-      // return this.$store.state.cartList.length
-      return this.$store.getters.cartLength
-    }
+    // 两种语法
+    // ...mapGetters(['cartLength','cartList'])
+    ...mapGetters({
+      length: 'cartLength',
+      list: 'cartList'
+    })
   },
   mounted () {
     
@@ -44,4 +48,5 @@ export default {
     background-color: var(--color-high-text);
     color: #fff
   }
+
 </style>
