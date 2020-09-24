@@ -1,17 +1,22 @@
 <template>
     <div class="profile">
-    <!-- 导航 -->
-     <nav-bar  class="nav-bar">
-       <div slot="center">我的</div>
-     </nav-bar>
-     <!-- 商品的列表 -->
+      <div class="header">
+          <div class="head-portrait"></div>
+          <div>设置</div>
+          <div class="account clear">
+            <div class="account-info">我的收藏</div>
+            <div class="account-info">我的足迹</div>
+            <div class="account-info">我的关注</div>
+            <div class="account-info">优惠券</div>
+          </div>
 
-     <!-- 底部汇总 -->
+      </div>
+    
   </div>
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar'
+
 export default {
   name: 'Profile',
   data () {
@@ -20,7 +25,7 @@ export default {
     };
   },
   components: {
-    NavBar
+
   },
   mounted () {
     
@@ -32,8 +37,34 @@ export default {
 </script>
   
 <style scoped>
- .nav-bar{
+.clear{clear:both;}
+  .header{
+
+    height: 300px;
     background-color: var(--color-high-text);
-    color: #fff
+    padding: 20px;
   }
+
+  .head-portrait{
+    float: left;
+    width: 100px; 
+    height: 100px; 
+    background-color:#fff;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  .account {
+    display: flex;
+    /* border: 1px solid red; */
+    /* padding: 20px; */
+  }
+
+  .account-info {
+    width: 100%;
+    margin-right: 1px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+  }
+
 </style>

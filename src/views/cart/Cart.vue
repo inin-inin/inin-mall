@@ -2,7 +2,7 @@
   <div class="cart">
     <!-- 导航 -->
      <nav-bar  class="nav-bar">
-       <div slot="center">购物车()</div>
+       <div slot="center">购物车({{cartLength}})</div>
      </nav-bar>
      <!-- 商品的列表 -->
 
@@ -23,6 +23,12 @@ export default {
   },
   components: {
     NavBar
+  },
+  computed:{
+    cartLength(){
+      // return this.$store.state.cartList.length
+      return this.$store.getters.cartLength
+    }
   },
   mounted () {
     

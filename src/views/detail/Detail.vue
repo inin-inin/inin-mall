@@ -4,11 +4,11 @@
 
 
    <detail-nav-bar @titleClick="titleClick" ref="nav"></detail-nav-bar>
-   <ul>
+   <!-- <ul>
      <li v-for="(item, index) in $store.state.cartList" :key="index">
        {{item}}
      </li>
-   </ul>
+   </ul> -->
     <scroll class="content" 
     ref="scroll" 
     :probe-type="3" 
@@ -28,7 +28,7 @@
      <back-top @click.native="backClick" class="back-top" v-show="isShowBackTop">
       <img src="~assets/img/common/top.png" alt="">
     </back-top>
-    <Detail-bottom-bar @addToCart="addToCart"></Detail-bottom-bar>
+    <Detail-bottom-bar @addCart="addCart"></Detail-bottom-bar>
   </div>
 </template>
 
@@ -196,11 +196,11 @@ export default {
           // 是否显示回到顶部
           this.listenShowBackTop(position)
         },
-    addToCart(){
+    addCart(){
       // console.log('123321');
       // 1.获取购物车需要展示的信息
       const product = {}
-      product.image = this. topImages[0]
+      product.image = this.topImages[0]
       console.log(this.goods.title);
       product.title = this.goods.title
       product.desc = this.goods.desc
@@ -211,10 +211,11 @@ export default {
       // this.$store.cartList.push(product)
 
       // mutation用commit
-      this.$store.commit('addToCart',product)
-      console.log(this.$store.state.cartList.length);
+      // this.$store.commit('addCart',product)
+      // console.log(this.$store.state.cartList.length);
       // action用dispatch
-      //  this.$store.dispatch('addToCart',product)
+       this.$store.dispatch('addCart',product)
+      console.log('123');
     }
   }
   }

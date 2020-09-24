@@ -5,7 +5,7 @@
                       @tabClick="tabClick"
                       ref="tabControl1"
                       class="tab-control" v-show="isTabFixed">
-                      </tab-control>
+        </tab-control>
       <scroll class="content" 
               ref="scroll" 
               :probe-type="3" 
@@ -90,15 +90,15 @@ export default {
 
   },
   activated() {
-    // console.log('activated');
-    this.$refs.scroll.scrollTo(0, this.saveY, 0)
+    console.log('activated');
+    this.$refs.scroll.scrollTo(0, this.saveY, 200)
     this.$refs.scroll.refresh()
   },
   deactivated() {
-    // console.log('deactivated');
+    console.log('deactivated');
     // 保存Y值
     this.saveY = this.$refs.scroll.getScrollY()
-    // console.log(this.saveY);
+    console.log(this.saveY);
 
     // 取消全局事件的监听
     this.$bus.$off('itemImageLoad',this.itemImgListener)
