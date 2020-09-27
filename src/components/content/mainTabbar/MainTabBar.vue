@@ -1,7 +1,8 @@
 <template>
 
     <tab-bar class="tabbar">
-      <tab-bar-item path='/home' activeColor='skyblue'>
+      <!-- <tab-bar-item path='/home' activeColor='skyblue'> -->
+      <tab-bar-item path='/home'>
         <img slot="item-icon" src="~assets/img/tabbar/home.svg" alt="">
         <img slot="item-icon_active" src="~assets/img/tabbar/home_active.svg" alt="">
         <div slot="item-text">首页</div>
@@ -11,7 +12,8 @@
         <img slot="item-icon_active" src="~assets/img/tabbar/list_active.svg" alt="">
         <div slot="item-text">列表</div>
       </tab-bar-item>
-      <tab-bar-item path='/cart' activeColor='pink'>
+      <!-- <tab-bar-item path='/cart' activeColor='pink'> -->
+      <tab-bar-item path='/cart'>
          <img slot="item-icon" src="~assets/img/tabbar/shopping-cart.svg" alt="">
          <img slot="item-icon_active" src="~assets/img/tabbar/shopping-cart_active.svg" alt="">
         <div slot="item-text">购物车</div>
@@ -49,7 +51,7 @@ export default {
 </script>
   
 <style scoped>
- .tabbar{
+ /* .tabbar{ */
    /* z-index: 8; */
- }
+ /* } */
 </style>

@@ -5,12 +5,14 @@
       :key="index" 
       :item-info="item"></cart-list-item>
      </scroll>
+     <BottomBar></BottomBar>
   </div>
 </template>
 
 <script>
 import Scroll from 'components/common/scroll/Scroll'
 import CartListItem from './CartListItem'
+import BottomBar from './BottomBar'
 
 import { mapGetters } from 'vuex';
 export default {
@@ -18,14 +20,10 @@ export default {
   computed:{
     ...mapGetters(['cartList'])
   },
-  data () {
-    return {
-      
-    };
-  },
   components: {
     Scroll,
-    CartListItem
+    CartListItem,
+    BottomBar
   },
   mounted () {
     
