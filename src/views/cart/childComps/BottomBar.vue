@@ -1,12 +1,15 @@
 <template>
   <div class="bottom-bar">
     <span class="select-all">
-      <CheckButton class="check-button" @click.native="aClick"></CheckButton>
+      <CheckButton 
+        class="check-button" 
+        :is-checked="isSelectAll"
+        @click.native="checkClick"></CheckButton>
       <span>全选</span>
     </span>
     <span class="total-price">合计: ¥{{totalPrice}}</span>
 
-    <span class="buy-product">去结算({{checklength}})</span>
+    <span class="buy-product">结算({{checklength}})</span>
     <!-- <span class="buy-product">结算</span> -->
 
   </div>
@@ -41,12 +44,36 @@ import { mapGetters } from 'vuex';
       },
       checklength(){
         return this.cartList.filter(item => item.checked).length
+      },
+      isSelectAll() {
+      
+        if(this.cartList.length === 0) return false
+
+        // 1.使用find
+        // return !this.cartList.find(item => !item.checked) 
+
+        // 2.使用filter
+        // return !(this.cartList.filter(item => !item.checked).length)
+
+        // 3.普通遍历
+        for(let item of this.cartList) {
+          if(!item.checked){
+            return false
+          }
+        }
+        return true
       }
-      // isSelectAll: function () {
-      //   return this.$store.getters.cartList.find(item => item.checked === false) === undefined;
-      // }
     },
     methods: {
+      checkClick(){
+        if(this.isSelectAll){
+          // 全部选中 点击一下取反(全部不选中) 反之全部选中
+          this.cartList.forEach(item => item.checked = false)
+        }else{
+          // 没有全部选中 点击就全部选中
+          this.cartList.forEach(item => item.checked = true)
+        }
+      }
     //   checkBtnClick: function () {
     //     // 1.判断是否有未选中的按钮
     //     let isSelectAll = this.$store.getters.cartList.find(item => !item.checked);
@@ -62,9 +89,7 @@ import { mapGetters } from 'vuex';
     //       });
     //     }
     //   }
-    aClick(){
-      console.log(this.$store.state.cartList);
-    }
+
     }
 	}
 </script>

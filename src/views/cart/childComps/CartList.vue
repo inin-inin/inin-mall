@@ -35,9 +35,7 @@ export default {
 </script>
   
 <style scoped>
-  .cart-list{
 
-  }
   .content{
     position: absolute;
     top: 44px;
