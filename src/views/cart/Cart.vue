@@ -7,12 +7,14 @@
      <!-- 商品的列表 -->
     <cart-list></cart-list>
      <!-- 底部汇总 -->
+     <bottom-bar></bottom-bar>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar'
 import CartList from './childComps/CartList'
+import BottomBar from './childComps/BottomBar'
 
 import { mapGetters } from 'vuex'
 export default {
@@ -24,7 +26,8 @@ export default {
   },
   components: {
     NavBar,
-    CartList
+    CartList,
+    BottomBar
   },
   computed:{
     // 两种语法

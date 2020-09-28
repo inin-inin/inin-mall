@@ -5,7 +5,7 @@
       :key="index" 
       :item-info="item"></cart-list-item>
      </scroll>
-     <!-- <BottomBar></BottomBar> -->
+     <BottomBar></BottomBar>
   </div>
 </template>
 
@@ -36,14 +36,14 @@ export default {
   
 <style scoped>
   .cart-list{
-    height: calc(100% - 44px - 49px)
+
   }
   .content{
     position: absolute;
     top: 44px;
     left: 0;
     right: 0;
-    bottom: 49px;
+    bottom: 93px;
     overflow: hidden;
   }
  
