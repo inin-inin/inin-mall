@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="check-button" :class="{check: isChecked}">
-        <el-checkbox></el-checkbox>
+        
         <img src="~/assets/img/cart/tick.svg" alt="">
       </div>
     </div>
