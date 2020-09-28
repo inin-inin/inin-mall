@@ -214,7 +214,7 @@ export default {
       // this.$store.commit('addCart',product)
       // console.log(this.$store.state.cartList.length);
       // action用dispatch
-       this.$store.dispatch('addCart',product)
+      this.$store.dispatch('addCart',product)
       console.log('123');
     }
   }

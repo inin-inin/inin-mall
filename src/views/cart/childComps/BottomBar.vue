@@ -3,9 +3,8 @@
     <CheckButton class="select-all" @checkBtnClick="checkBtnClick" v-model="isSelectAll"></CheckButton>
     <!-- <span>全选</span> -->
     <span class="total-price">合计: ¥{{totalPrice}}</span>
-    <!-- <span class="total-price">合计: ¥{{totalPrice}}</span> -->
-    <!-- <span class="buy-product">去结算({{$store.getters.cartCount}})</span> -->
-    <span class="buy-product">结算</span>
+    <span class="buy-product">去结算{{$store.getters.acrtCount}}</span>
+    <!-- <span class="buy-product">结算</span> -->
   </div>
 </template>
 

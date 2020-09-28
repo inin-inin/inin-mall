@@ -2,7 +2,7 @@
   <div class="cart">
     <!-- 导航 -->
      <nav-bar class="nav-bar">
-       <div slot="center">购物车({{length}})</div>
+       <div slot="center">麻布袋({{length}})</div>
      </nav-bar>
      <!-- 商品的列表 -->
     <cart-list></cart-list>

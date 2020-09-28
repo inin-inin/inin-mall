@@ -1,6 +1,6 @@
 <template>
     <div class="aaa">
-        <nav-bar class="home-nav"><span slot="center">购物街</span></nav-bar>
+        <nav-bar class="home-nav"><span slot="center">路边摊</span></nav-bar>
         <tab-control :titles="['流行','新款','精选']" 
                       @tabClick="tabClick"
                       ref="tabControl1"

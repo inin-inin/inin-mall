@@ -5,7 +5,7 @@
       :key="index" 
       :item-info="item"></cart-list-item>
      </scroll>
-     <BottomBar></BottomBar>
+     <!-- <BottomBar></BottomBar> -->
   </div>
 </template>
 
