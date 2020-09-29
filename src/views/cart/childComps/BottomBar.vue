@@ -9,7 +9,7 @@
     </span>
     <span class="total-price">合计: ¥{{totalPrice}}</span>
 
-    <span class="buy-product">结算({{checklength}})</span>
+    <span class="buy-product" @click="toPay">结算({{checklength}})</span>
     <!-- <span class="buy-product">结算</span> -->
 
   </div>
@@ -73,6 +73,9 @@ import { mapGetters } from 'vuex';
           // 没有全部选中 点击就全部选中
           this.cartList.forEach(item => item.checked = true)
         }
+      },
+      toPay(){
+         this.$router.push('topay/')
       }
     //   checkBtnClick: function () {
     //     // 1.判断是否有未选中的按钮

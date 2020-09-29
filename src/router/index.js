@@ -10,6 +10,8 @@ const Profile = () =>
     import ('views/profile/Profile')
 const Detail = () =>
     import ('views/detail/Detail')
+const ToPay = () =>
+    import ('views/topay/ToPay')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -39,7 +41,12 @@ const routes = [{
         path: '/detail/:iid',
         name: 'Detail',
         component: Detail
+    }, {
+        path: '/topay',
+        name: 'Topay',
+        component: ToPay
     }
+
 ]
 
 const router = new VueRouter({
