@@ -7,7 +7,7 @@
      </nav-bar>
      <!-- 商品的列表 -->
     <cart-list></cart-list>
-    <empty></empty>
+    <!-- <empty></empty> -->
      <!-- 底部汇总 -->
      <bottom-bar v-if="isShow"></bottom-bar>
   </div>
@@ -16,7 +16,7 @@
 <script>
 import NavBar from 'components/common/navbar/NavBar'
 import CartList from './childComps/CartList'
-import empty from './childComps/empty'
+// import empty from './childComps/empty'
 import BottomBar from './childComps/BottomBar'
 
 import { mapGetters } from 'vuex'
@@ -30,7 +30,7 @@ export default {
   components: {
     NavBar,
     CartList,
-    empty,
+    // empty,
     BottomBar
   },
   computed:{
