@@ -17,23 +17,23 @@
               </div>
               <div class="top_3">
                   <div class="Paying">
-                      <img src="~assets/img/profile/待付款.png" alt="">
+                      <img src="~assets/img/profile/toBePaid.png" alt="">
                       <p>待付款</p>
                   </div>
                   <div class="Receiving">
-                      <img src="~assets/img/profile/待收货.png" alt="">
+                      <img src="~assets/img/profile/toBeReceived.png" alt="">
                       <p>待收货</p>
                   </div>
                   <div class="Evaluate">
-                      <img src="~assets/img/profile/待评价.png" alt="">
+                      <img src="~assets/img/profile/toBeEvaluated.png" alt="">
                       <p>待评价</p>
                   </div>
                   <div class="Returns">
-                      <img src="~assets/img/profile/售后.png" alt="">
+                      <img src="~assets/img/profile/afterSale.png" alt="">
                       <p>退换/售后</p>
                   </div>
                   <div class="Order">
-                      <img src="~assets/img/profile/订单.png" alt="">
+                      <img src="~assets/img/profile/order.png" alt="">
                       <p>我的订单</p>
                   </div>
               </div>
