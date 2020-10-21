@@ -1,6 +1,6 @@
 import { debounce } from './utils'
 import BackTop from 'components/content/backTop/BackTop'
-
+import { POP, NEW, SELL } from "./const";
 export const itemListenerMixin = {
     data() {
         return {
@@ -38,5 +38,12 @@ export const backTopMixin = {
     },
     component: {
         BackTop
+    }
+}
+export const tabControlMixin = {
+    data: function() {
+        return {
+            currentType: POP
+        }
     }
 }

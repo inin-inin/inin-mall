@@ -27,7 +27,12 @@
     methods: {
       addCart() {
         console.log('点击加入购物车');
-        this.$emit('addCart')
+        this.$emit('addCart');
+         this.$notify({
+          // title: '成功',
+          message: '加入购物车成功',
+          type: 'success'
+        });
       }
     }
 	}

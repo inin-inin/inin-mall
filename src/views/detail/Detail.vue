@@ -28,7 +28,7 @@
      <back-top @click.native="backClick" class="back-top" v-show="isShowBackTop">
       <img src="~assets/img/common/top.png" alt="">
     </back-top>
-    <Detail-bottom-bar @addCart="addCart"></Detail-bottom-bar>
+    <Detail-bottom-bar @addCart="addToCart"></Detail-bottom-bar>
   </div>
 </template>
 
@@ -48,6 +48,8 @@ import BackTop from 'components/content/backTop/BackTop'
 import {getDetail,Goods,Shop,GoodsParam,getRecommend} from 'network/detail'
 import {debounce} from 'common/utils.js'
 import {itemListenerMixin,backTopMixin} from 'common/mixin'
+
+import { mapActions } from 'vuex'
 
 
 export default {
@@ -130,6 +132,7 @@ export default {
     this.$bus.$off('itemImageLoad',this.itemImgListener)
   },
   methods: {
+    ...mapActions(['addCart']),
     imageLoad(){
       this.$refs.scroll.refresh()
 
@@ -196,7 +199,7 @@ export default {
           // 是否显示回到顶部
           this.listenShowBackTop(position)
         },
-    addCart(){
+    addToCart(){
       // console.log('123321');
       // 1.获取购物车需要展示的信息
       const product = {}
@@ -207,15 +210,21 @@ export default {
       product.price = this.goods.newPrice 
       product.iid = this.iid
 
-      // 2.将商品添加到购物车里
+      // 2.将商品添加到购物车里(1.promise 2.mapActions)
       // this.$store.cartList.push(product)
 
       // mutation用commit
       // this.$store.commit('addCart',product)
       // console.log(this.$store.state.cartList.length);
       // action用dispatch
-      this.$store.dispatch('addCart',product)
-      console.log('123');
+      this.addCart(product).then(res => {
+        console.log(res);
+      })
+
+      // this.$store.dispatch('addCart',product).then(res => {
+      //   console.log(res);
+      // })
+      // console.log('123');
     }
   }
   }

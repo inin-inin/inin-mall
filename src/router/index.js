@@ -12,6 +12,10 @@ const Detail = () =>
     import ('views/detail/Detail')
 const ToPay = () =>
     import ('views/topay/ToPay')
+const Order = () =>
+    import ('views/profile/Order')
+const Login = () =>
+    import ('views/profile/Login')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -45,6 +49,14 @@ const routes = [{
         path: '/topay',
         name: 'Topay',
         component: ToPay
+    }, {
+        path: '/order',
+        name: 'Order',
+        component: Order
+    }, {
+        path: '/login',
+        name: 'Login',
+        component: Login
     }
 
 ]

@@ -14,5 +14,23 @@ export default {
         payload.checked = true
         state.cartList.push(payload)
             // console.log('123123');
+    },
+    DEL(state) {
+        let flag = state.carlist.some(item => {
+            return item.selected == true;
+        });
+        if (!flag) {
+            Toast.text("请至少选择一个商品");
+        } else {
+            //确定按钮点击事件
+            //this.close(); //关闭对话框
+            let cartlist = [];
+            state.cartList.forEach((item, index) => {
+                if (!item.selected) {
+                    cartlist.push(item);
+                }
+            });
+            return (state.cartList = cartlist);
+        }
     }
 }

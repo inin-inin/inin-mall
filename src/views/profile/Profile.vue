@@ -6,7 +6,7 @@
               <div class="top_1">
                   <img src="" alt="">
                   <p class="user">1234*****482</p>
-                  <p class="setting">设置</p>
+                  <p class="login" @click="loginClick">登陆</p>
               </div>
     
               <div class="top_2">
@@ -20,7 +20,7 @@
                       <img src="~assets/img/profile/toBePaid.png" alt="">
                       <p>待付款</p>
                   </div>
-                  <div class="Receiving">
+                  <div class="Receiving" @click="receiveClick">
                       <img src="~assets/img/profile/toBeReceived.png" alt="">
                       <p>待收货</p>
                   </div>
@@ -94,7 +94,12 @@ export default {
     
   },
   methods: {
-    
+    receiveClick(){
+        this.$router.push('order/')
+    },
+    loginClick(){
+        this.$router.push('login/')
+    }
   }
 }
 </script>
@@ -122,9 +127,11 @@ export default {
 .top_1 .user{
     margin-left: 20px;
 }
-.top_1 .setting{
+.login{
+    margin-top: 10px;
     margin-left: auto;
     font-size: 15px;
+    color: brown;
 }
 .top_2{
     display: flex;

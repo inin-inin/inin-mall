@@ -76,6 +76,10 @@ import { mapGetters } from 'vuex';
       },
       toPay(){
          this.$router.push('topay/')
+          if(this.carList == null){
+        // Toast("购物车没有商品,快去购物吧!")
+        return; 
+      };
       }
     //   checkBtnClick: function () {
     //     // 1.判断是否有未选中的按钮
